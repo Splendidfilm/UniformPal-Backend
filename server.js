@@ -8,15 +8,17 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // for local dev
-      "https://uniformPal-Backend.vercel.app", // <-- Replace with your actual Vercel URL
+      "https://uniform-pal.vercel.app/",
+      "https://localhost:5173"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    credentials: true
   })
 );
 
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 app.use("/uploads", express.static("uploads"));
 
 // ✅ Ensure folders exist
