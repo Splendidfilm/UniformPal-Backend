@@ -11,7 +11,7 @@ app.use(
     origin: (origin, callback) => {
       if (!origin) return callback(null, true)
       const allowed = [
-    "https://uniform-pal.vercel.app/",
+    "https://uniform-pal.vercel.app",
     "http://localhost:5173",
       ]
       if (allowed.includes(origin)) {
