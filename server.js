@@ -3,18 +3,25 @@ import cors from "cors";
 import fs from "fs";
 import multer from "multer";
 import path from "path";
+import { constants } from "buffer";
 
 const app = express();
 app.use(
   cors({
-    origin: [
-      "https://uniform-pal.vercel.app/",
-      "https://localhost:5173"
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true)
+      const allowed = [
+    "https://uniform-pal.vercel.app/",
+    "http://localhost:5173",
+      ]
+      if (allowed.includes(origin)) {
+        callback(null, true)
+      } else{
+        callback(new Error("Not allowed by CORS"))
+      }
+    }
   })
-);
+)
 
 
 app.use(express.json());
